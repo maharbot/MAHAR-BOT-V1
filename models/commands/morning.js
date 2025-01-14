@@ -1,26 +1,29 @@
 const fs = require("fs");
 module.exports.config = {
-	name: "night",
+	name: "morning",
     version: "1.0.1",
 	hasPermssion: 0,
 	credits: "𝐏𝐫𝐢𝐲𝐚𝐧𝐬𝐡 𝐑𝐚𝐣𝐩𝐮𝐭", 
-	description: "hihihihi",
+	description: "Responds to good morning messages",
 	commandCategory: "no prefix",
-	usages: "morning",
+	usages: "good morning",
     cooldowns: 5, 
 };
 
 module.exports.handleEvent = function({ api, event, client, __GLOBAL }) {
 	var { threadID, messageID } = event;
-	if (event.body.indexOf("good morning")==0 || event.body.indexOf("good morning")==0 || event.body.indexOf("Gud night")==0 || event.body.indexOf("Gud nini")==0) {
+	if (event.body.toLowerCase().startsWith("good morning") || 
+        event.body.toLowerCase().startsWith("gud morning") || 
+        event.body.toLowerCase().includes("morning")) {
 		var msg = {
-				body: "G̥ͦO̥ͦO̥ͦD̥ͦ N̥ͦI̥ͦG̥ͦH̥ͦT̥ͦ 🌉✨ 𝔹𝕐𝔼 𝕋ℂ  💫🥀 Sᴡᴇᴇᴛ Dʀᴇᴀᴍs 😴             ★ ° . *　　　°　.　°☆ 　. * . 　　　★ 　° :. ★　 * • ○ ° ★.　 * 　.　 　　　　　.° 　. ● . ★ ° . *　　　°　.　°☆. * ● ¸ . 　　　★ 　° :●. 　 *• ○ ° ★　 .　 * 　.　 　　　　　.° 　. ● . ★ ° . *　　　°　.°☆ 　. * ● ¸ . 　　　★° :. 　 * • ○ ° ★　 .　 * 　　★　　　　. 　 ° 　.  . 　    ★° °☆ 　¸. ● . 　　★　★° . *　　　°　.　°☆ 　. * ● ¸ .★ ° . *　　　°　.　°☆ 　. * ● ¸. 　　　★ 　° :. 　 * • ○ ° ★.　 * 　.　 　★     ° :.☆",
-				attachment: fs.createReadStream(__dirname + `/cache/night.mp4`)
-			}
-			api.sendMessage(msg, threadID, messageID);
-    api.setMessageReaction("😴", event.messageID, (err) => {}, true)
-		}
+			body: "🌞✨ Gᴏᴏᴅ Mᴏʀɴɪɴɢ! 💐 Hᴀᴠᴇ A Bʟᴇssᴇᴅ Dᴀʏ Aʜᴇᴀᴅ! 🌼 🌸 ☕\n\n✯ ✨ •.¸✯¸.• ✨ ✯ ✨ •.¸✯¸.• ✨",
+			attachment: fs.createReadStream(__dirname + `/cache/night.gif`)
+		};
+		api.sendMessage(msg, threadID, messageID);
+        api.setMessageReaction("🌞", event.messageID, (err) => {}, true);
 	}
-	module.exports.run = function({ api, event, client, __GLOBAL }) {
+};
 
-  }
+module.exports.run = function({ api, event, client, __GLOBAL }) {
+    // Run function can be used for testing or manual execution if needed
+};
