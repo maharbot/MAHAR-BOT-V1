@@ -32,57 +32,7 @@ module.exports.handleEvent = async function({ api, event, args, Threads, Users }
      return api.sendMessage("Hug me baby ☺️", threadID);
    };
 
-  const fs = require('fs');
-const axios = require('axios');
-
-if (event.body.toLowerCase() === "good evening") {
-    const imageUrl = "https://i.imgur.com/pOgTr2Q.jpeg";
-    const filePath = "./temp_image.jpeg"; // Temporarily save image
-
-    axios({
-        url: imageUrl,
-        method: 'GET',
-        responseType: 'stream',
-    })
-        .then(response => {
-            // Save image locally
-            const writer = fs.createWriteStream(filePath);
-            response.data.pipe(writer);
-
-            writer.on('finish', () => {
-                const message = {
-                    body: "Good Evening! I hope you’re having a wonderful time.",
-                    attachment: fs.createReadStream(filePath),
-                };
-
-                api.sendMessage(message, threadID, (err) => {
-                    if (err) {
-                        console.error("Error sending the message:", err);
-                        api.sendMessage("Sorry, I couldn't send the image. Please try again later.", threadID);
-                    } else {
-                        console.log("Message sent successfully with image!");
-                    }
-
-                    // Delete the image after sending
-                    fs.unlinkSync(filePath);
-                });
-            });
-
-            writer.on('error', (err) => {
-                console.error("Error writing the image to file:", err);
-                api.sendMessage("Good Evening! But I couldn't fetch the image. Sorry!", threadID);
-            });
-        })
-        .catch(error => {
-            console.error("Error fetching the image:", error);
-            api.sendMessage("Good Evening! But I couldn't fetch the image. Sorry!", threadID);
-        });
-}        .catch(error => {
-            console.error("Error fetching the image:", error);
-            api.sendMessage("Good Evening! But I couldn't fetch the image. Sorry!", threadID);
-        });
-}
-   if ((event.body.toLowerCase() == "sim") || (event.body.toLowerCase() == "simsimi")) {
+     if ((event.body.toLowerCase() == "sim") || (event.body.toLowerCase() == "simsimi")) {
      return api.sendMessage("Prefix Kon Lagayega? Pehle Prefix Lagao Fir Likho Sim", threadID);
    };
   
@@ -131,7 +81,45 @@ if ([
    if ((event.body.toLowerCase() == "lol") || (event.body.toLowerCase() == "lol bot")) {
      return api.sendMessage("Khud ko Kya LeGend Samjhte Ho 😂", threadID);
    };
-
+if ([
+    "good evening", 
+    "evening", 
+    "gd evening", 
+    "gud evening", 
+    "ge", 
+    "g.e", 
+    "evenin"
+].includes(event.body.toLowerCase())) {
+    return api.sendMessage("Good Evening! I hope you’re having a wonderful time.", threadID);
+}
+  if ([
+    "i love you bot", 
+    "bot i love you", 
+    "i love you"
+].includes(event.body.toLowerCase())) {
+    return api.sendMessage("Yaar, Mujhe aisi baatein nahi pasand. Main buhat shreef hoon. Haan, mera owner single hai, bolo to number tak de sakta hoon. 😁", threadID);
+  }
+  if ([
+    "bot i miss you", 
+    "i miss you bot"
+].includes(event.body.toLowerCase())) {
+    return api.sendMessage("Hyeee, I miss you too! SuChi kia karun, ID issue aa jata hai is liye mujhe new ID banne ka wait karna padta hai. Jab new ID banti hai, to owner mujhe add kar deta hai. 😅", threadID);
+  }
+ if ([
+    "bot kis na add kiya", 
+    "bot kisne add kiya", 
+    "bot kis ne add kiya", 
+    "bot ko kisne add kiya",
+    "bot ko kis ne add kiya", 
+    "bot add kisne kiya", 
+    "kisne bot ko add kiya", 
+    "kis na bot ko add kiya", 
+    "bot ko kisne add kiya", 
+    "bot kis ne add kiya?"
+].some(phrase => event.body.toLowerCase().includes(phrase))) {
+    return api.sendMessage("Kio kia howa, add ho gaya so ho gaya. Ma ap ko kia taqleef hy jnab 👻. Waisay ap bhi khelo na, bot bot! 😄 Mera owner single hai, bolo to number tak de sakta hoon! 😁", threadID);
+ }
+  
   if ([
     "how are you", 
     "how r u", 
@@ -161,6 +149,9 @@ if ([
 ].includes(event.body.toLowerCase())) {
     return api.sendMessage("Main theek hoon, aap kaise hain? Umeed karta hoon ke aap ka din acha guzray ga.", threadID);
   }
+  if ((event.body.toLowerCase() == "morning") || (event.body.toLowerCase() == "good morning")) {
+    return api.sendMessage("گڈ مارننگ! 🌞 بہت خوش آمدید! 🙌 امید کرتا ہوں کہ آپ کا دن خوشگوار گزرے، اللہ پاک آپ کو ہر برائی سے بچائے، آپ کو اپنی حفظ و امان میں رکھے، اور کبھی کسی کا محتاج نہ کرے! آمین! 🤲💫💕💪🌻☕✨", threadID);
+    }
   
    if ((event.body.toLowerCase() == "morning") || (event.body.toLowerCase() == "good morning")) {
      return api.sendMessage("Ꮆɵɵɗ Ɱ❍ɽƞɪɪƞɠ Ɛⱱɛɽɣ❍ƞɛ🌅, Ƭɽɣ ꌗɵɱɛ Cɵffɛɛ ❍ɽ Ƭɛɑ Ƭ❍ Ꮗɑҡɛ Uƥ☕✨💫", threadID);
