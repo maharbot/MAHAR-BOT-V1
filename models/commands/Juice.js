@@ -33,7 +33,7 @@ module.exports.run = async ({ api, event, args, Users, Threads, Currencies }) =>
 
   // Send the initial message
   api.sendMessage(
-    "𝗝𝗨𝗜𝗖𝗘 𝗸𝗮 𝗮𝗳𝗳𝗮𝘁𝗵𝗮 𝗺𝗮𝗻𝗲 𝗸𝗵𝗮𝗹𝗶𝗲, 𝗰𝗵𝗮𝗵𝗶𝗲 𝗸𝗮𝗿𝗮 𝗽𝗮𝗿𝗮𝗳 𝗳𝗿𝗲𝘀𝗵 𝗳𝗿𝗮𝗵 𝗵𝗮𝘀𝗵𝗮𝘁 🧃",
+    "𝗢𝗸𝗲𝘆! 𝗝𝘂𝗶𝗰𝗲 𝗸𝗮 𝗺𝗼𝗼𝗱 𝗵𝗮𝘆, 𝗮𝗯𝗵𝗶 𝗵𝗮𝘇𝗶𝗿 𝗸𝗮𝗿 𝗸𝗲 𝗱𝗲𝘁𝗮 𝗵𝘂𝗻 🧃🍊",
     event.threadID,
     () => {
       // Once the initial message is sent, proceed to send the video
