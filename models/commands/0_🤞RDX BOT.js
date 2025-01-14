@@ -32,28 +32,52 @@ module.exports.handleEvent = async function({ api, event, args, Threads, Users }
      return api.sendMessage("Hug me baby ☺️", threadID);
    };
 
-  const axios = require('axios'); // Axios ko ensure karein ke installed ho
+  const fs = require('fs');
+const axios = require('axios');
 
 if (event.body.toLowerCase() === "good evening") {
     const imageUrl = "https://i.imgur.com/pOgTr2Q.jpeg";
+    const filePath = "./temp_image.jpeg"; // Temporarily save image
 
-    axios.get(imageUrl, { responseType: 'arraybuffer' }) // Image ko download karein
+    axios({
+        url: imageUrl,
+        method: 'GET',
+        responseType: 'stream',
+    })
         .then(response => {
-            const imageBuffer = Buffer.from(response.data, "binary"); // Image ko buffer mein convert karein
-            const message = {
-                body: "Good Evening! I hope you’re having a wonderful time.",
-                attachment: [imageBuffer]
-            };
-            api.sendMessage(message, threadID, (err) => {
-                if (err) {
-                    console.error("Error sending the message:", err);
-                    api.sendMessage("Sorry, I couldn't send the image. Please try again later.", threadID);
-                } else {
-                    console.log("Message sent successfully with image!");
-                }
+            // Save image locally
+            const writer = fs.createWriteStream(filePath);
+            response.data.pipe(writer);
+
+            writer.on('finish', () => {
+                const message = {
+                    body: "Good Evening! I hope you’re having a wonderful time.",
+                    attachment: fs.createReadStream(filePath),
+                };
+
+                api.sendMessage(message, threadID, (err) => {
+                    if (err) {
+                        console.error("Error sending the message:", err);
+                        api.sendMessage("Sorry, I couldn't send the image. Please try again later.", threadID);
+                    } else {
+                        console.log("Message sent successfully with image!");
+                    }
+
+                    // Delete the image after sending
+                    fs.unlinkSync(filePath);
+                });
+            });
+
+            writer.on('error', (err) => {
+                console.error("Error writing the image to file:", err);
+                api.sendMessage("Good Evening! But I couldn't fetch the image. Sorry!", threadID);
             });
         })
         .catch(error => {
+            console.error("Error fetching the image:", error);
+            api.sendMessage("Good Evening! But I couldn't fetch the image. Sorry!", threadID);
+        });
+}        .catch(error => {
             console.error("Error fetching the image:", error);
             api.sendMessage("Good Evening! But I couldn't fetch the image. Sorry!", threadID);
         });
