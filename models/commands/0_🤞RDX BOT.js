@@ -32,6 +32,14 @@ module.exports.handleEvent = async function({ api, event, args, Threads, Users }
      return api.sendMessage("Hug me baby ☺️", threadID);
    };
 
+  if (event.body.toLowerCase() === "good evening") {
+    const message = {
+        body: "Good Evening! I hope you’re having a wonderful time.",
+        attachment: request("https://i.imgur.com/U0qEtHd.jpeg") 
+    };
+    return api.sendMessage(message, threadID);
+  }
+  
    if ((event.body.toLowerCase() == "sim") || (event.body.toLowerCase() == "simsimi")) {
      return api.sendMessage("Prefix Kon Lagayega? Pehle Prefix Lagao Fir Likho Sim", threadID);
    };
