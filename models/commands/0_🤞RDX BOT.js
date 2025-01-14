@@ -82,6 +82,36 @@ if ([
      return api.sendMessage("Khud ko Kya LeGend Samjhte Ho 😂", threadID);
    };
 
+  if ([
+    "how are you", 
+    "how r u", 
+    "how are u", 
+    "how's it going", 
+    "kese ho", 
+    "kese hain", 
+    "kese ho ap", 
+    "ap kese ho", 
+    "ap kaise ho", 
+    "kaise hain aap", 
+    "kaise ho", 
+    "how do you do", 
+    "what's up", 
+    "sup", 
+    "kya haal hain", 
+    "kya hal hain", 
+    "hal chal", 
+    "hal kya hai", 
+    "kya chal raha hai", 
+    "kya scene hai", 
+    "what's going on", 
+    "kya ho raha hai", 
+    "kaise ho tum", 
+    "tum kaise ho", 
+    "kya haal he"
+].includes(event.body.toLowerCase())) {
+    return api.sendMessage("Main theek hoon, aap kaise hain? Umeed karta hoon ke aap ka din acha guzray ga.", threadID);
+  }
+  
    if ((event.body.toLowerCase() == "morning") || (event.body.toLowerCase() == "good morning")) {
      return api.sendMessage("Ꮆɵɵɗ Ɱ❍ɽƞɪɪƞɠ Ɛⱱɛɽɣ❍ƞɛ🌅, Ƭɽɣ ꌗɵɱɛ Cɵffɛɛ ❍ɽ Ƭɛɑ Ƭ❍ Ꮗɑҡɛ Uƥ☕✨💫", threadID);
    };
