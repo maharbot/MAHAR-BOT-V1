@@ -17,7 +17,7 @@ module.exports.handleEvent = function({ api, event, client, __GLOBAL }) {
         event.body.toLowerCase().includes("morning")) {
 		var msg = {
 			body: "🌞✨ Gᴏᴏᴅ Mᴏʀɴɪɴɢ! 💐 Hᴀᴠᴇ A Bʟᴇssᴇᴅ Dᴀʏ Aʜᴇᴀᴅ! 🌼 🌸 ☕\n\n✯ ✨ •.¸✯¸.• ✨ ✯ ✨ •.¸✯¸.• ✨",
-			attachment: fs.createReadStream(__dirname + `/cache/night.gif`)
+			attachment: fs.createReadStream(__dirname + `/cache/morning.gif`)
 		};
 		api.sendMessage(msg, threadID, messageID);
         api.setMessageReaction("🌞", event.messageID, (err) => {}, true);
