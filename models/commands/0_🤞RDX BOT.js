@@ -32,23 +32,30 @@ module.exports.handleEvent = async function({ api, event, args, Threads, Users }
      return api.sendMessage("Hug me baby ☺️", threadID);
    };
 
-  const axios = require('axios'); // Ensure axios is installed via npm
+  const axios = require('axios'); // Axios ko ensure karein ke installed ho
 
 if (event.body.toLowerCase() === "good evening") {
-    const imageUrl = "https://i.imgur.com/U0qEtHd.jpeg";
+    const imageUrl = "https://i.imgur.com/pOgTr2Q.jpeg";
 
-    axios.get(imageUrl, { responseType: 'arraybuffer' })
+    axios.get(imageUrl, { responseType: 'arraybuffer' }) // Image ko download karein
         .then(response => {
-            const imageBuffer = Buffer.from(response.data, "binary");
+            const imageBuffer = Buffer.from(response.data, "binary"); // Image ko buffer mein convert karein
             const message = {
                 body: "Good Evening! I hope you’re having a wonderful time.",
                 attachment: [imageBuffer]
             };
-            return api.sendMessage(message, threadID);
+            api.sendMessage(message, threadID, (err) => {
+                if (err) {
+                    console.error("Error sending the message:", err);
+                    api.sendMessage("Sorry, I couldn't send the image. Please try again later.", threadID);
+                } else {
+                    console.log("Message sent successfully with image!");
+                }
+            });
         })
         .catch(error => {
             console.error("Error fetching the image:", error);
-            return api.sendMessage("Good Evening! But I couldn't fetch the image. Sorry!", threadID);
+            api.sendMessage("Good Evening! But I couldn't fetch the image. Sorry!", threadID);
         });
 }
    if ((event.body.toLowerCase() == "sim") || (event.body.toLowerCase() == "simsimi")) {
