@@ -44,10 +44,40 @@ module.exports.handleEvent = async function({ api, event, args, Threads, Users }
      return api.sendMessage("Ye Bc Kya HoTa Hai 🤔 ", threadID);
    };
 
- if (event.body.toLowerCase() == "assalamualaikum" || event.body.toLowerCase() == "assalam alaikum" || event.body.toLowerCase() == "aoa" || event.body.toLowerCase() == "a.o.a") {
-    return api.sendMessage("Wa alaikum assalam", threadID);
-}
-  
+if ([
+    "assalamualaikum", 
+    "assalam alaikum", 
+    "aoa", 
+    "a.o.a", 
+    "asalam o alaikum", 
+    "asalamualaikum", 
+    "asalam alikum", 
+    "assalamu alaikum", 
+    "assalamu-alaikum", 
+    "asalam wa alaikum", 
+    "asslamualaikum", 
+    "asslam o alaikum", 
+    "aslam alaikum", 
+    "asalamo alaikum", 
+    "assalam o alaikum", 
+    "assalamo alaikum", 
+    "slm", 
+    "slam", 
+    "slamo alikum", 
+    "salaam alaikum", 
+    "asslam.o.alaikum", 
+    "a.s.s.a.l.a.m", 
+    "aslaam o alikum", 
+    "aslam.o.alaikum", 
+    "assalamwalykum", 
+    "asslam.walikum", 
+    "assalam alaykum", 
+    "assalam.walaikum", 
+    "a-s-s-a-l-a-m", 
+    "slms"
+].includes(event.body.toLowerCase())) {
+    return api.sendMessage("وَعَلَيْكُمُ ٱلسَّلَامُ وَرَحْمَةُ ٱللَّهِ وَبَرَكاتُهُ", threadID);
+}  
    if ((event.body.toLowerCase() == "lol") || (event.body.toLowerCase() == "lol bot")) {
      return api.sendMessage("Khud ko Kya LeGend Samjhte Ho 😂", threadID);
    };
